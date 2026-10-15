@@ -2,7 +2,7 @@
   <img src="./header.svg" width="100%" alt="Animated header">
 </div>
 
-# Hi, I'm Rahul R 👋
+# Hi, I'm Rahul  👋
 
 Computer Science Engineering Student at Mepco Schlenk Engineering College.
 
