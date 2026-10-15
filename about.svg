@@ -1,92 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 0 800 320">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
   <style>
-    .g-blob1 { animation: g-drift1 2s ease-in-out infinite; }
-    .g-blob2 { animation: g-drift2 2s ease-in-out infinite; }
-    .g-blob3 { animation: g-drift3 2s ease-in-out infinite; }
-    @keyframes g-drift1 {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(40px, -25px); }
-      50% { transform: translate(0, -50px); }
-      75% { transform: translate(-40px, -25px); }
+    .corner { animation: cornerPulse 12s ease-in-out infinite; }
+    .frame { animation: framePulse 12s ease-in-out infinite; }
+    .status-dot { animation: statusPulse 12s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .scan { animation: scanDrift 12s linear infinite; }
+    .glitch-r { animation: glitchR 12s ease-out infinite; }
+    .glitch-c { animation: glitchC 12s ease-out infinite; }
+
+    @keyframes cornerPulse {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 1; }
     }
-    @keyframes g-drift2 {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(-30px, 25px); }
-      50% { transform: translate(0, 50px); }
-      75% { transform: translate(30px, 25px); }
+    @keyframes framePulse {
+      0%, 100% { stroke-opacity: 0.35; }
+      50% { stroke-opacity: 0.6; }
     }
-    @keyframes g-drift3 {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(25px, -40px); }
-      50% { transform: translate(-40px, 0); }
-      75% { transform: translate(25px, 40px); }
+    @keyframes statusPulse {
+      0%, 70%, 100% { opacity: 1; transform: scale(1); }
+      80% { opacity: 0.4; transform: scale(0.7); }
     }
-    .g-p { animation: g-pulse 3s ease-in-out infinite; }
-    .p1 { animation-delay: -0.6s; }
-    .p2 { animation-delay: -1.2s; }
-    .p3 { animation-delay: -1.8s; }
-    .p4 { animation-delay: -2.4s; }
-    @keyframes g-pulse {
-      0%, 100% { opacity: 0.15; }
-      50% { opacity: 0.32; }
+    @keyframes scanDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(8px); }
+    }
+    @keyframes glitchR {
+      0%, 4%, 8%, 92%, 96%, 100% { opacity: 0; transform: translate(0, 0); }
+      6%, 94% { opacity: 0.7; transform: translate(-3px, 1px); }
+    }
+    @keyframes glitchC {
+      0%, 4%, 8%, 92%, 96%, 100% { opacity: 0; transform: translate(0, 0); }
+      6%, 94% { opacity: 0.7; transform: translate(3px, -1px); }
     }
   </style>
   <defs>
-    <filter id="g-blur" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="60"/>
-    </filter>
-    <filter id="g-card-shadow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000" flood-opacity="0.5"/>
-    </filter>
-    <filter id="g-mini-shadow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/>
-    </filter>
-    <radialGradient id="g-blob1" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.55"/>
-      <stop offset="60%" stop-color="#7c3aed" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="g-blob2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.55"/>
-      <stop offset="60%" stop-color="#22d3ee" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="g-blob3" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.55"/>
-      <stop offset="60%" stop-color="#f472b6" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="g-vignette" cx="50%" cy="50%" r="65%">
-      <stop offset="50%" stop-color="rgb(0,0,0)" stop-opacity="0"/>
-      <stop offset="100%" stop-color="rgb(0,0,0)" stop-opacity="0.45"/>
-    </radialGradient>
+    <linearGradient id="neon-about-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0118"/>
+      <stop offset="100%" stop-color="#ff2bd6" stop-opacity="0.1"/>
+    </linearGradient>
+    <pattern id="scan-about" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#ffffff" fill-opacity="0.025"/>
+    </pattern>
   </defs>
-  
-  <rect width="800" height="320" fill="#0b0b12"/>
-  <g filter="url(#g-blur)" class="g-blobs">
-    <circle class="g-blob1" cx="224.00000000000003" cy="176" r="220" fill="url(#g-blob1)"/>
-    <circle class="g-blob2" cx="576" cy="144" r="240" fill="url(#g-blob2)"/>
-    <circle class="g-blob3" cx="400" cy="336" r="200" fill="url(#g-blob3)"/>
+
+  <rect width="100%" height="100%" fill="url(#neon-about-bg)" rx="14" ry="14"/>
+
+  <!-- Holographic frame: dashed neon border with corner brackets layered on top -->
+  <g class="frame">
+    <rect x="48" y="28" width="704" height="250" rx="6" fill="none" stroke="#ff2bd6" stroke-width="1" stroke-opacity="0.45" stroke-dasharray="4 6"/>
   </g>
-  <rect width="800" height="320" fill="url(#g-vignette)"/>
-  <g class="g-particles"><circle class="g-p p0" cx="400" cy="160" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p1" cx="768.68" cy="128.9" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p2" cx="422.89" cy="311.6" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p3" cx="623.29" cy="16.48" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p4" cx="549.49" cy="294.09" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p0" cx="581.39" cy="31.99" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p1" cx="650.43" cy="179.51" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p2" cx="466.23" cy="76.08" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p3" cx="131.64" cy="188.8" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p4" cx="215.85" cy="35.67" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p0" cx="388.6" cy="253.2" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p1" cx="328.48" cy="80.42" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p2" cx="71.62" cy="177.26" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p3" cx="398.07" cy="43.05" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p4" cx="326.41" cy="232.52" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p0" cx="576.73" cy="133.75" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p1" cx="770.75" cy="252.99" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p2" cx="573.68" cy="116.77" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p3" cx="657.67" cy="264.98" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p4" cx="529.06" cy="155.4" r="1.2" fill="#ffffff" opacity="0.2"/><circle class="g-p p0" cx="704.15" cy="246.36" r="1.2" fill="#ffffff" opacity="0.2"/></g>
-  
-  
-  <g filter="url(#g-card-shadow)">
-    <rect x="30" y="30" width="740" height="260" rx="18" ry="18" fill="rgba(255,255,255,0.04)"/>
+  <g class="corner">
+    <g transform="translate(48 28) scale(1 1)">
+    <rect x="0" y="0" width="14" height="2" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+    <rect x="0" y="0" width="2" height="14" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
   </g>
-  <rect x="30.5" y="30.5" width="739" height="259" rx="18" ry="18" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-  <rect x="31.5" y="31.5" width="737" height="257" rx="17" ry="17" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-  
-  <text x="62" y="110" fill="#f5f5f7" font-family='"Inter", system-ui, sans-serif' font-size="28" font-weight="700">Hi, I&apos;m Rahul R</text>
-  <text x="62" y="150" fill="#f5f5f7" opacity="0.75" font-family='"Inter", system-ui, sans-serif' font-size="14" font-weight="400">I build things that turn LLM rollouts into accountable workflows. Lately: agent</text>
-  <text x="62" y="172" fill="#f5f5f7" opacity="0.75" font-family='"Inter", system-ui, sans-serif' font-size="14" font-weight="400">observability, replayable runs, and the kind of debugging tooling I wish existed when I</text>
-  <text x="62" y="194" fill="#f5f5f7" opacity="0.75" font-family='"Inter", system-ui, sans-serif' font-size="14" font-weight="400">started.</text>
-  <rect x="62" y="213" width="183" height="20" rx="10" ry="10" fill="#7c3aed" fill-opacity="0.18" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="1"/>
-  <text x="71" y="225" fill="#f5f5f7" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="500">Computer Science Engineer</text>
-  <rect x="253" y="213" width="190" height="20" rx="10" ry="10" fill="#7c3aed" fill-opacity="0.18" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="1"/>
-  <text x="262" y="225" fill="#f5f5f7" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="500">Mepco Schlenk Engineering…</text>
-  <rect x="451" y="213" width="163" height="20" rx="10" ry="10" fill="#7c3aed" fill-opacity="0.18" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="1"/>
-  <text x="460" y="225" fill="#f5f5f7" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="500">Aruppukottai,TamilNadu</text>
-  <rect x="0.5" y="0.5" width="799" height="319" rx="14" ry="14" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <g transform="translate(752 28) scale(-1 1)">
+    <rect x="0" y="0" width="14" height="2" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+    <rect x="0" y="0" width="2" height="14" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+  </g>
+  <g transform="translate(48 278) scale(1 -1)">
+    <rect x="0" y="0" width="14" height="2" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+    <rect x="0" y="0" width="2" height="14" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+  </g>
+  <g transform="translate(752 278) scale(-1 -1)">
+    <rect x="0" y="0" width="14" height="2" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+    <rect x="0" y="0" width="2" height="14" fill="#ff2bd6" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+  </g>
+  </g>
+
+  <!-- Title in upper-left of frame -->
+  <text class="title" x="62" y="50" fill="#00ddff" font-family="ui-monospace, monospace" font-size="11" letter-spacing="2.5">// USER.PROFILE</text>
+  <!-- Frame index/timestamp callout in upper-right (static) -->
+  <text x="738" y="50" text-anchor="end" fill="#00ddff" fill-opacity="0.6" font-family="ui-monospace, monospace" font-size="10" letter-spacing="1.5">[ FRAME // 00:1A ]</text>
+
+  <!-- Bio (3 lines max, glitchy chromatic ghosts) -->
+  <g class="bio0">
+      <text class="glitch-r" x="400" y="104" text-anchor="middle" fill="#ff0080" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500" opacity="0" style="mix-blend-mode:screen">Computer Science and Engineering undergraduate with a strong</text>
+      <text class="glitch-c" x="400" y="104" text-anchor="middle" fill="#00ffff" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500" opacity="0" style="mix-blend-mode:screen">Computer Science and Engineering undergraduate with a strong</text>
+      <text x="400" y="104" text-anchor="middle" fill="#ffffff" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500">Computer Science and Engineering undergraduate with a strong</text>
+    </g>
+  <g class="bio1">
+      <text class="glitch-r" x="400" y="132" text-anchor="middle" fill="#ff0080" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500" opacity="0" style="mix-blend-mode:screen">foundation in Java, C, C++, Python, databases, and web</text>
+      <text class="glitch-c" x="400" y="132" text-anchor="middle" fill="#00ffff" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500" opacity="0" style="mix-blend-mode:screen">foundation in Java, C, C++, Python, databases, and web</text>
+      <text x="400" y="132" text-anchor="middle" fill="#ffffff" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500">foundation in Java, C, C++, Python, databases, and web</text>
+    </g>
+  <g class="bio2">
+      <text class="glitch-r" x="400" y="160" text-anchor="middle" fill="#ff0080" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500" opacity="0" style="mix-blend-mode:screen">technologies. Seeking an internship or entry-level software…</text>
+      <text class="glitch-c" x="400" y="160" text-anchor="middle" fill="#00ffff" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500" opacity="0" style="mix-blend-mode:screen">technologies. Seeking an internship or entry-level software…</text>
+      <text x="400" y="160" text-anchor="middle" fill="#ffffff" font-family='"Inter", system-ui, sans-serif' font-size="20" font-weight="500">technologies. Seeking an internship or entry-level software…</text>
+    </g>
+
+  <!-- Skill pills, neon-outlined, alternating cyan/magenta -->
+  <g class="pill0">
+      <rect x="139" y="196" width="168" height="26" rx="13" fill="#0a0118" fill-opacity="0.6" stroke="#00ddff" stroke-width="1" filter="drop-shadow(0 0 4px #00ddff)"/>
+      <text x="223" y="213" text-anchor="middle" fill="#00ddff" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">FULL STACK DEVELOPER</text>
+    </g>
+  <g class="pill1">
+      <rect x="317" y="196" width="180" height="26" rx="13" fill="#0a0118" fill-opacity="0.6" stroke="#ff2bd6" stroke-width="1" filter="drop-shadow(0 0 4px #ff2bd6)"/>
+      <text x="407" y="213" text-anchor="middle" fill="#ff2bd6" font-family="ui-monospace, monospace" font-size="10" letter-spacing="1">MEPCO SCHLENK ENGINEERING…</text>
+    </g>
+  <g class="pill2">
+      <rect x="507" y="196" width="153.6" height="26" rx="13" fill="#0a0118" fill-opacity="0.6" stroke="#00ddff" stroke-width="1" filter="drop-shadow(0 0 4px #00ddff)"/>
+      <text x="583.8" y="213" text-anchor="middle" fill="#00ddff" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">SIVAKASI,TAMILNADU</text>
+    </g>
+
+  <!-- Status indicator (bottom right of frame) -->
+  <g transform="translate(738 262)">
+    <text x="-12" y="3" text-anchor="end" fill="#00ddff" font-family="ui-monospace, monospace" font-size="10" letter-spacing="1.5">STATUS: ENGAGED</text>
+    <circle class="status-dot" cx="-4" cy="0" r="3" fill="#ff2bd6" filter="drop-shadow(0 0 5px #ff2bd6)"/>
+  </g>
+
+  <!-- Scanlines overlay -->
+  <g class="scan">
+    <rect width="800" height="308" fill="url(#scan-about)" pointer-events="none"/>
+  </g>
 </svg>
